@@ -18,8 +18,12 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/").permitAll() // Allow health check
                 .requestMatchers(HttpMethod.GET, "/api/v1/pets/**").permitAll()
-                .requestMatchers(HttpMethod.OPTIONS, "/api/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/v1/pets/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/api/v1/pets/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/api/v1/pets/**").permitAll()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().denyAll()
             )
             .headers(headers -> headers
