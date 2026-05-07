@@ -63,7 +63,7 @@ class PetServiceTest {
         Page<PetSummaryDto> result = petService.findPets("golden", PetCategory.DOGS, pageable);
 
         assertEquals(1, result.getTotalElements());
-        assertEquals("Buddy", result.getContent().getFirst().name());
+        assertEquals("Buddy", result.getContent().get(0).name());
     }
 
     @Test
